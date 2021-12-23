@@ -1,29 +1,9 @@
 ﻿@page "/"
 
 <!-- Menu -->
-<h1>Our selection of pizzas</h1>
 
-@foreach (var pizza in State.Menu.Pizzas)
-{
-	<div class="row">
-		<div class="col">
-			@pizza.Name
-		</div>
-		<div class="col text-right">
-			@($"{pizza.Price:0.00}")
-		</div>
-		<div class="col"></div>
-		<div class="col">
-			<img src="@SpicinessImage(pizza.Spiciness)" alt="@pizza.Spiciness" />
-		</div>
-
-		<div class="col">
-			<button class="btn btn-success pl-4 pr-4" @onclick="@(() => AddToBasket(pizza))">
-				Add
-			</button>
-		</div>
-	</div>
-}
+<PizzaList Title="Our Selection of Pizzas" Items="@State.Menu.Pizzas"
+	ButtonTitle="Order" ButtonClass="btn btn-success pl-4 pr-4" Selected="@AddToBasket"/>
 
 <!-- End menu --> 
 <!-- Shopping Basket -->
