@@ -19,4 +19,12 @@ public partial class CustomerEntry
 
     [Parameter]
     public EventCallback ValidSubmit { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<Customer> CustomerChanged { get; set; }
+
+    private void FieldChanged(string fieldName)
+    {
+        CustomerChanged.InvokeAsync(Customer);
+    }
 }

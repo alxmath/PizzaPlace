@@ -22,7 +22,7 @@
 <!-- Customer entry -->
 
 <CustomerEntry Title="Please enter your details below"
-	Customer="@State.Basket.Customer"
+	@bind-Customer="@State.Basket.Customer"
 	ButtonTitle="Checkout"
 	ButtonClass="mx-auto w-25 btn btn-success"
 	ValidSubmit="PlaceOrder"/>

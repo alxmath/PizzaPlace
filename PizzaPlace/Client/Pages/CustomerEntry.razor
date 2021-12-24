@@ -4,6 +4,8 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
+	<InputWatcher FieldChanged="@FieldChanged"/>
+
     <fieldset>
         <div class="mb-2 form-group form-floating">
 			<InputText class="form-control" id="name" placeholder="Name" @bind-Value="@Customer.Name"/>
