@@ -2,82 +2,31 @@
 
 <!-- Menu -->
 
-<PizzaList Title="Our Selection of Pizzas" Items="@State.Menu.Pizzas"
-	ButtonTitle="Order" ButtonClass="btn btn-success pl-4 pr-4" Selected="@AddToBasket"/>
+<PizzaList Title="Our Selection of Pizzas" 
+	Items="@State.Menu.Pizzas"
+	ButtonTitle="Order" 
+	ButtonClass="btn btn-success pl-4 pr-4" 
+	Selected="@AddToBasket"/>
 
 <!-- End menu --> 
+
 <!-- Shopping Basket -->
-@if (State.Basket.Orders.Any())
-{
-	<h1 class="">Your current order</h1>
 
-	@foreach (var (pizza, pos) in State.Basket.Orders.Select(
-		(id, pos) => (State.Menu.GetPizza(id), pos)))
-	{
-		<div class="row mb-2">
-			<div class="col">
-				@pizza.Name
-			</div>
-			<div class="col text-right">
-				@($"{pizza.Price:0.00}")
-			</div>
-			<div class="col"></div>
-			<div class="col"></div>
-			<div class="col">
-				<button class="btn btn-danger" @onclick="@(() => RemoveFromBasket(pos))">
-					Remove
-				</button>
-			</div>
-		</div>
-	}
+<ShoppingBasket Orders="@State.Basket.Orders"
+	GetPizzaFromId="@State.Menu.GetPizza"
+	Selected="@RemoveFromBasket"/>
 
-	<div class="row">
-		<div class="col"></div>
-		<div class="col"><hr /></div>
-		<div class="col"> </div>
-		<div class="col"> </div>
-	</div>
 
-	<div class="row">
-		<div class="col"> Total:</div>
-		<div class="col text-right font-weight-bold"> @($"{State.TotalPrice:0.00}")</div>
-		<div class="col"> </div>
-		<div class="col"> </div>
-		<div class="col"> </div>
-	</div>
-}
 <!-- Ending shopping basket -->
+
 <!-- Customer entry -->
 
-<h1 class="mt-2 mb-2">Please enter your details below</h1>
+<CustomerEntry Title="Please enter your details below"
+	Customer="@State.Basket.Customer"
+	ButtonTitle="Checkout"
+	ButtonClass="mx-auto w-25 btn btn-success"
+	ValidSubmit="PlaceOrder"/>
 
-<EditForm Model="@State.Basket.Customer" OnValidSubmit="PlaceOrder">
-
-	<DataAnnotationsValidator/>
-	<ValidationSummary />
-
-	<fieldset>
-		<div class="mb-2 form-group form-floating">
-			<InputText class="form-control" id="name" placeholder="Name" @bind-Value="@State.Basket.Customer.Name"/>
-			<label for="name">Name:</label>
-			<ValidationMessage For="@(() => State.Basket.Customer.Name)"/>
-		</div>
-		<div class="mb-2 form-group form-floating">
-			<InputText class="form-control" id="street" placeholder="Street" @bind-Value="@State.Basket.Customer.Street"/>
-			<label for="name">Street:</label>
-			<ValidationMessage For="@(() => State.Basket.Customer.Street)"/>
-		</div>
-		<div class="mb-2 form-group form-floating">
-			<InputText class="form-control col-6" id="city" placeholder="City" @bind-Value="@State.Basket.Customer.City"/>
-			<label for="City">City:</label>
-			<ValidationMessage For="@(() => State.Basket.Customer.City)"/>
-		</div>
-		<div class="mb-2">
-			<button class="mx-auto w-25 btn btn-success">Checkout</button>
-		</div>
-	
-	</fieldset>
-</EditForm>
 
 <!-- End customer entry -->
 <br />

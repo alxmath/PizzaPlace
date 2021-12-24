@@ -1,0 +1,27 @@
+﻿<h1 class="mt-2 mb-2">@Title</h1>
+
+<EditForm Model="@Customer" OnValidSubmit="@ValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <fieldset>
+        <div class="mb-2 form-group form-floating">
+			<InputText class="form-control" id="name" placeholder="Name" @bind-Value="@Customer.Name"/>
+			<label for="name">Name:</label>
+			<ValidationMessage For="@(() => Customer.Name)"/>
+		</div>
+		<div class="mb-2 form-group form-floating">
+			<InputText class="form-control" id="street" placeholder="Street" @bind-Value="@Customer.Street"/>
+			<label for="name">Street:</label>
+			<ValidationMessage For="@(() => Customer.Street)"/>
+		</div>
+		<div class="mb-2 form-group form-floating">
+			<InputText class="form-control col-6" id="city" placeholder="City" @bind-Value="@Customer.City"/>
+			<label for="City">City:</label>
+			<ValidationMessage For="@(() => Customer.City)"/>
+		</div>
+		<div class="mb-2">
+			<button class="@ButtonClass">Checkout</button>
+		</div>
+    </fieldset>
+</EditForm>
