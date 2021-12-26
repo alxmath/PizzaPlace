@@ -4,7 +4,7 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-	<InputWatcher FieldChanged="@FieldChanged"/>
+	<InputWatcher FieldChanged="@FieldChanged" @ref="@_inputWatcher"/>
 
     <fieldset>
         <div class="mb-2 form-group form-floating">
@@ -23,7 +23,7 @@
 			<ValidationMessage For="@(() => Customer.City)"/>
 		</div>
 		<div class="mb-2">
-			<button class="@ButtonClass">Checkout</button>
+			<button class="@ButtonClass" disabled="@_isInvalid">Checkout</button>
 		</div>
     </fieldset>
 </EditForm>

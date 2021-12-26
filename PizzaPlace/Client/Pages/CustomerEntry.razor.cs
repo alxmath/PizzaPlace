@@ -26,5 +26,9 @@ public partial class CustomerEntry
     private void FieldChanged(string fieldName)
     {
         CustomerChanged.InvokeAsync(Customer);
+        _isInvalid = !_inputWatcher.Validate();
     }
+
+    private InputWatcher _inputWatcher = default!;
+    bool _isInvalid = true;
 }

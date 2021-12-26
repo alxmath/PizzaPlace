@@ -27,4 +27,3 @@ public class InputWatcher : ComponentBase
     public bool Validate() =>
         EditContext?.Validate() ?? false;
 }
-
