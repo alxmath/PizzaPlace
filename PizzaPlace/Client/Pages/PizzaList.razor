@@ -1,13 +1,25 @@
 ﻿@if (Items is null || !Items.Any())
 {
-	<div>Loading...</div>
+    <div>Loading...</div>
 }
 else
 {
-	<h1>@Title</h1>
+    <ItemList Items="@Items">
+        <Header>
+            <h1>@Title</h1>
+        </Header>
+        <RowTemplate Context="pizza">
+            <PizzaItem Pizza="@pizza"
+                   ButtonClass=@ButtonClass
+                   ButtonTitle=@ButtonTitle
+                   Selected=@Selected />
+        </RowTemplate>
+    </ItemList>
 
-	@foreach (var pizza in Items)
-	{
-		<PizzaItem Pizza="@pizza" ButtonClass="@ButtonClass" ButtonTitle="@ButtonTitle" Selected="@Selected"></PizzaItem>
-	}
+    @*<h1>@Title</h1>
+
+        @foreach (var pizza in Items)
+        {
+        <PizzaItem Pizza="@pizza" ButtonClass="@ButtonClass" ButtonTitle="@ButtonTitle" Selected="@Selected"></PizzaItem>
+        }*@
 }
