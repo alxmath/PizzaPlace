@@ -7,15 +7,24 @@ namespace PizzaPlace.Server.Pages
     [Route("api/[controller]")]
     public class PizzasController : Controller
     {
-        private static readonly List<Pizza> _pizza = new()
+        private readonly PizzaPlaceDbContext _db;
+
+        public PizzasController(PizzaPlaceDbContext db)
         {
-            new Pizza(1, "Pepperoni", 8.99M, Spiciness.Spicy),
-            new Pizza(2, "Margarita", 7.99M, Spiciness.None),
-            new Pizza(3, "Diabolo", 9.99M, Spiciness.Hot),
-        };
+            _db = db;
+        }
 
         [HttpGet("/pizzas")]
         public IQueryable<Pizza> GetPizzas() =>
-            _pizza.AsQueryable();
+            _db.Pizzas;
+
+
+        [HttpPost("/pizzas")]
+        public IActionResult InsertPizza([FromBody] Pizza pizza)
+        {
+            _db.Pizzas.Add(pizza);
+            _db.SaveChanges();
+            return Created($"pizzas/{pizza.Id}", pizza);
+        }
     }
 }
